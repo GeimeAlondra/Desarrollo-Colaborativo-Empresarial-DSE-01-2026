@@ -22,6 +22,50 @@ function agregarProducto() {
     const descripcion = document.getElementById('descripcion').value;
     
     const nuevo = new Product(nombre, precio, stock, descripcion);
-    productos.push(nuevo);
+    productos.push(nuevo)
+    renderizarProductos();
+
     
 }
+
+function renderizarProductos() {
+    const tbody = document.getElementById('cuerpo-tabla');
+    if (!tbody) {
+        console.error("No se encontró el contenedor de la tabla");
+        return;
+    }
+
+    tbody.innerHTML = '';
+
+    productos.forEach(producto => {
+        const fila = document.createElement('tr');
+
+        fila.innerHTML = `
+            <td>${producto.id}</td>
+            <td>${producto.nombre}</td>
+            <td>$${producto.precio.toFixed(2)}</td>
+            <td>${producto.stock}</td>
+            <td>${producto.descripcion}</td>
+        `;
+
+        tbody.appendChild(fila);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderizarProductos();
+
+    const form = document.getElementById('form-producto');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const nombre = document.getElementById('nombre').value;
+        const precio = document.getElementById('precio').value;
+        const stock = document.getElementById('stock').value;
+        const descripcion = document.getElementById('descripcion').value;
+
+        agregarProducto(nombre, precio, descripcion);
+
+        form.reset();
+    });
+});
