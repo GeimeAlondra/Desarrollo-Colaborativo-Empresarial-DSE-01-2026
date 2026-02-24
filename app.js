@@ -18,10 +18,10 @@ function agregarProducto() {
     // Obtener valores del formulario
     const nombre = document.getElementById('nombre').value;
     const precio = document.getElementById('precio').value;
-    const descripcion = document.getElementById('descripcion').value;
     const stock = document.getElementById('stock').value;
+    const descripcion = document.getElementById('descripcion').value;
     
-    const nuevo = new Product(nombre, precio, descripcion, stock);
+    const nuevo = new Product(nombre, precio, stock, descripcion);
     productos.push(nuevo);
     
 }
