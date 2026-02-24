@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Productos</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css"> 
 
 </head>
 <body>
@@ -10,8 +12,8 @@
 
     <div id="formulario">
         <input type="text" id="nombre" placeholder="Nombre del producto">
-        <input type="number" id="precio" placeholder="Precio">
-        <input type="number" id="stock" placeholder="Stock">
+        <input type="number" id="precio" placeholder="Precio" min="0" step="0.01">
+        <input type="number" id="stock" placeholder="Stock" min="0">
         <input type="text" id="descripcion" placeholder="Descripción">
                 
         <button onclick="agregarProducto()">Agregar</button>
