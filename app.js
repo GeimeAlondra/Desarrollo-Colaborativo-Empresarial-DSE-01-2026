@@ -3,7 +3,7 @@ class Product {
         this.id = Date.now();
         this.nombre = nombre;
         this.precio = parseFloat(precio);
-        this.stock = parseInt(stock) || 0;
+        this.stock = parseInt(stock);
         this.descripcion = descripcion;
     }
 }
@@ -18,10 +18,10 @@ function agregarProducto() {
     // Obtener valores del formulario
     const nombre = document.getElementById('nombre').value;
     const precio = document.getElementById('precio').value;
+    const descripcion = document.getElementById('descripcion').value;
+    const stock = document.getElementById('stock').value;
     
-    
-    // Crear y agregar producto (stock por defecto = 0)
-    const nuevo = new Product(nombre, precio, 0, "");
+    const nuevo = new Product(nombre, precio, descripcion, stock);
     productos.push(nuevo);
     
 }
