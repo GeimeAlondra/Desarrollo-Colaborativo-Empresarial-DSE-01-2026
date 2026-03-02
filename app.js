@@ -94,7 +94,7 @@ function renderizarProductos() {
     const tbody = document.getElementById("cuerpo-tabla");
     tbody.innerHTML = "";
 
-    productos.forEach(producto => {
+productos.forEach(producto => {
         const fila = document.createElement("tr");
         fila.innerHTML = `
             <td>${producto.id}</td>
@@ -106,6 +106,9 @@ function renderizarProductos() {
                 ${producto.estado.charAt(0).toUpperCase() + producto.estado.slice(1)}
             </td>
             <td>${producto.descripcion || '—'}</td>
+            <td>
+                <button class="btn-editar" onclick="editarProducto(${producto.id})">Editar</button>
+            </td>
         `;
         tbody.appendChild(fila);
     });
