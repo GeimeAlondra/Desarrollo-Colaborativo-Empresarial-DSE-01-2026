@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -164,22 +164,6 @@ h2 {
     box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
 }
 
-#formulario button {
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 0.8rem;
-    border-radius: 6px;
-    font-weight: 550;
-    font-size: 0.98rem;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-#formulario button:hover {
-    background: #1d4ed8;
-}
-
 .seccion {
     display: none;
 }
@@ -208,4 +192,60 @@ h2 {
         padding: 0.75rem 0.9rem;
         font-size: 0.88rem;
     }
+}
+
+#tabla-productos td:last-child {
+    white-space: nowrap;           
+    text-align: center;
+    padding: 0.8rem 1rem;          
+}
+
+#btn-guardar {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 6px;
+    font-weight: 550;
+    font-size: 0.98rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#btn-guardar:hover {
+    background: #1d4ed8;
+}
+
+#btn-cancelar {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 6px;
+    font-weight: 550;
+    font-size: 0.98rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#btn-cancelar:hover {
+    background-color: #dc2626;
+}
+
+.btn-editar {
+    background-color: #fbbf24;
+    color: #1f2937;
+    border: none;
+    padding: 0.45rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.btn-editar:hover {
+    background-color: #f59e0b;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(217, 119, 6, 0.25);
 }

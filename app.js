@@ -131,6 +131,27 @@ productos.forEach(producto => {
     });
 }
 
+// Cancelar acción
+function cancelarAccion(){
+   document.getElementById("producto-id").value = "";
+    document.getElementById("nombre").value = "";
+    document.getElementById("categoria").value = "";
+    document.getElementById("precio").value = "";
+    document.getElementById("stock").value = "";
+    document.getElementById("estado").value = "";
+    document.getElementById("descripcion").value = "";
+
+    document.getElementById("btn-guardar").textContent = "Agregar producto";
+    document.querySelector("#seccion-agregar h2").textContent = "Agregar nuevo producto";
+
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.seccion').forEach(s => s.classList.remove('active'));
+    document.querySelector('[data-section="lista"]').classList.add('active');
+    document.getElementById('seccion-lista').classList.add('active');
+
+    renderizarProductos();
+}
+
 // Navegación entre secciones
 document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
