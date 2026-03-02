@@ -68,6 +68,28 @@ function agregarProducto() {
     }
 }
 
+function editarProducto(id) {
+    const producto = productos.find(p => p.id === id);
+    if (!producto) return;
+
+    // Cargar datos en el formulario
+    document.getElementById("producto-id").value = producto.id;
+    document.getElementById("nombre").value = producto.nombre;
+    document.getElementById("categoria").value = producto.categoria;
+    document.getElementById("precio").value = producto.precio;
+    document.getElementById("stock").value = producto.stock;
+    document.getElementById("estado").value = producto.estado;
+    document.getElementById("descripcion").value = producto.descripcion;
+
+    document.getElementById("btn-guardar").textContent = "Actualizar producto";
+    document.querySelector("#seccion-agregar h2").textContent = "Editar producto";
+
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.seccion').forEach(s => s.classList.remove('active'));
+    document.querySelector('[data-section="agregar"]').classList.add('active');
+    document.getElementById('seccion-agregar').classList.add('active');
+}
+
 function renderizarProductos() {
     const tbody = document.getElementById("cuerpo-tabla");
     tbody.innerHTML = "";
