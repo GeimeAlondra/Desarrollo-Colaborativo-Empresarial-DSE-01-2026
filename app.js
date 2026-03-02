@@ -72,6 +72,17 @@ function agregarProducto() {
     document.getElementById("stock").value = "";
     document.getElementById("estado").value = "";
     document.getElementById("descripcion").value = "";
+    document.getElementById("btn-guardar").textContent = "Agregar producto";
+    document.querySelector("#seccion-agregar h2").textContent = "Agregar nuevo producto";
+
+    // Volver a la lista y re-renderizar
+    document.getElementById("btn-guardar").textContent = "Agregar producto";
+    document.querySelector("#seccion-agregar h2").textContent = "Agregar nuevo producto";
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.seccion').forEach(s => s.classList.remove('active'));
+    document.querySelector('[data-section="lista"]').classList.add('active');
+    document.getElementById('seccion-lista').classList.add('active');
+    renderizarProductos();
 }
 
 function editarProducto(id) {
