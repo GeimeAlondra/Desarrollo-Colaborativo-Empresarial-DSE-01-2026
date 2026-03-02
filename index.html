@@ -4,35 +4,67 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Productos</title>
-        <link rel="stylesheet" href="styles.css"> 
-
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <h1>Agregar Producto</h1>
 
-    <div id="formulario">
-        <input type="text" id="nombre" placeholder="Nombre del producto">
-        <input type="number" id="precio" placeholder="Precio" min="0" step="0.01">
-        <input type="number" id="stock" placeholder="Stock" min="0">
-        <input type="text" id="descripcion" placeholder="Descripción">
-                
-        <button onclick="agregarProducto()">Agregar</button>
-    </div>
+    <!-- Menú -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">Gestión de inventario</h1>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-btn active" data-section="lista">Ver productos</a></li>
+                <li><a href="#" class="nav-btn" data-section="agregar">Agregar producto</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <h2>Lista de Productos</h2>
-    <table id="tabla-productos" border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Stock</th>
-                <th>Descripción</th>
-            </tr>
-        </thead>
-        <tbody id="cuerpo-tabla">
-        </tbody>
-    </table>
+    <!-- Lista de productos -->
+    <section id="seccion-lista" class="seccion active">
+        <h2>Lista de productos</h2>
+        <table id="tabla-productos">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Estado</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla"></tbody>
+        </table>
+    </section>
+
+    <section id="seccion-agregar" class="seccion">
+        <h2>Agregar nuevo producto</h2>
+        <div id="formulario">
+            <input type="text" id="nombre" placeholder="Nombre del producto" required>
+            <select id="categoria" required>
+                <option value="" disabled selected>Seleccione categoría</option>
+                <option value="Electrónica">Electrónica</option>
+                <option value="Laptops">Informática</option>
+                <option value="Periféricos">Periféricos</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Componentes">Componentes</option>
+                <option value="Otros">Otros</option>
+            </select>
+            <input type="number" id="precio" placeholder="Precio" min="0" step="0.01" required>
+            <input type="number" id="stock" placeholder="Stock" min="0" required>
+            <select id="estado" required>
+                <option value="" disabled selected>Estado</option>
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+            <textarea id="descripcion" placeholder="Descripción (opcional)" rows="3"></textarea>
+            
+            <button onclick="agregarProducto()">Agregar producto</button>
+        </div>
+    </section>
 
     <script src="app.js"></script>
 </body>
