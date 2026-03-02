@@ -34,6 +34,7 @@
                     <th>Stock</th>
                     <th>Estado</th>
                     <th>Descripción</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="cuerpo-tabla"></tbody>
@@ -43,6 +44,7 @@
     <section id="seccion-agregar" class="seccion">
         <h2>Agregar nuevo producto</h2>
         <div id="formulario">
+            <input type="hidden" id="producto-id" value="">
             <input type="text" id="nombre" placeholder="Nombre del producto" required>
             <select id="categoria" required>
                 <option value="" disabled selected>Seleccione categoría</option>
@@ -61,8 +63,8 @@
                 <option value="inactivo">Inactivo</option>
             </select>
             <textarea id="descripcion" placeholder="Descripción (opcional)" rows="3"></textarea>
-            
-            <button onclick="agregarProducto()">Agregar producto</button>
+            <button id="btn-guardar" onclick="agregarProducto()">Agregar producto</button>
+            <button id="btn-cancelar" onclick="cancelarAccion()">Cancelar</button>
         </div>
     </section>
 
