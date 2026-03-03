@@ -12,54 +12,6 @@ body {
     min-height: 100vh;
 }
 
-.navbar {
-    background: rgb(149, 205, 235);
-    border-bottom: 1px solid #e5e7eb;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    position: sticky;
-    top: 0;
-    z-index: 20;
-}
-
-.nav-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 4rem;
-}
-
-.logo {
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: #1e40af;
-    letter-spacing: -0.025em;
-}
-
-.nav-links {
-    display: flex;
-    gap: 1.25rem;
-    list-style: none;
-}
-
-.nav-btn {
-    color: #4b5563;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    padding: 0.45rem 1rem;
-    border-radius: 6px;
-    transition: all 0.18s ease;
-}
-
-.nav-btn:hover,
-.nav-btn.active {
-    color: #1e40af;
-    background-color: #eff6ff;
-}
-
 main {
     max-width: 1100px;
     margin: 2.5rem auto;
@@ -76,15 +28,57 @@ h2 {
     letter-spacing: -0.02em;
 }
 
+/* #region Navbar */
+.navbar {
+    background: rgb(149, 205, 235);
+    margin-bottom: 30px;
+    min-height: 75px;
+}
+
+.navbar .container-fluid {
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navbar-brand {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #1e40af !important;
+    letter-spacing: -0.025em;
+}
+
+.navbar-nav {
+    gap: 0.2rem;
+    margin-left: auto !important;
+}
+
+.nav-link {
+    color: #4b5563 !important;
+    font-size: 16px !important;
+    padding: 0.45rem 1rem !important;
+    border-radius: 10px;
+    transition: all 0.18s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #1e40af;
+    background-color: #eff6ff;
+}
+
+/* #endregion */
+
+/* #region tabla de productos */
+
 #tabla-productos {
     width: 100%;
-    max-width: 1000px;
     margin: 0 auto 2.5rem auto;
-    background: white;
+    background: #8bb8e6;
     border: 1px solid #d8dfe7;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
 
 #tabla-productos thead {
@@ -92,44 +86,59 @@ h2 {
     border-bottom: 2px solid #cbd5e1;
 }
 
-#tabla-productos th,
-#tabla-productos td {
-    padding: 0.9rem 1.1rem;
-    font-size: 0.92rem;
-    text-align: center;
-}
-
-#tabla-productos th{
+#tabla-productos th {
     font-weight: 600;
     color: #1e293b;
     font-size: 1rem;
+    text-align: center;
+    padding: 0.9rem 1.1rem;
     letter-spacing: 0.4px;
 }
 
 #tabla-productos td {
-    border-bottom: 1px solid #cbd5e1;
-    border-right: 1px solid #cbd5e1;
+    font-size: 16px !important;
+    text-align: center;
+    align-content: center;
     color: #334155;
+    border-bottom: 1px solid #cbd5e1;
 }
 
-#tabla-productos tbody tr:last-child td {
-    border-bottom: none;
+#tabla-productos td:last-child {
+    white-space: nowrap;
+    text-align: center;
+    padding: 0.8rem 1rem;
 }
 
-#tabla-productos tbody tr:hover {
-    background-color: #f7fafd;
-}
+/* #endregion */
 
+/* #region estados */
 .estado-activo {
-    color: #166534;
+    color: #166534 !important;
     font-weight: bold;
-    background: #dcfce7;
+    background: #dcfce7 !important;
 }
 
 .estado-inactivo {
-    color: #991b1b;
+    color: #991b1b !important;
     font-weight: bold;
-    background: #fee2e2;
+    background: #fee2e2 !important;
+}
+
+/* #endregion */
+
+/* #region formulario */
+
+.form-group { 
+    position: relative; 
+    padding-top: 20px; 
+}
+
+label{
+    position: absolute; 
+    top: 0; 
+    font-size: 14px; 
+    color: blue; 
+    transition: 0.2s;
 }
 
 #formulario {
@@ -137,7 +146,7 @@ h2 {
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     padding: 1.8rem 2rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
     display: grid;
     gap: 1.2rem;
     max-width: 620px;
@@ -161,9 +170,12 @@ h2 {
 #formulario textarea:focus {
     outline: none;
     border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
 }
 
+/* #endregion */
+
+/* #region visibilidad de secciones */
 .seccion {
     display: none;
 }
@@ -172,34 +184,33 @@ h2 {
     display: block;
 }
 
-@media (max-width: 768px) {
-    .nav-container {
-        padding: 0 1rem;
-        height: 3.8rem;
-    }
-    
+/* #endregion*/
+
+/* #region Responsive */
+@media (max-width: 992px) {
     main {
         padding: 0 1rem;
         margin-top: 1.8rem;
     }
-    
+
     #formulario {
         padding: 1.4rem 1.6rem;
     }
-    
+
+    .tabla-productos-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
     #tabla-productos th,
     #tabla-productos td {
         padding: 0.75rem 0.9rem;
-        font-size: 0.88rem;
     }
 }
 
-#tabla-productos td:last-child {
-    white-space: nowrap;           
-    text-align: center;
-    padding: 0.8rem 1rem;          
-}
+/* #endregion */
 
+/* #region Botones */
 #btn-guardar {
     background: #2563eb;
     color: white;
@@ -249,3 +260,5 @@ h2 {
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(217, 119, 6, 0.25);
 }
+
+/* #endregion */
