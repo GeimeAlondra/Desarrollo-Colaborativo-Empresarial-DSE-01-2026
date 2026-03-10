@@ -155,7 +155,9 @@ function renderizarProductos() {
             <td>${producto.descripcion || '—'}</td>
             <td>
                 <button class="btn-editar" onclick="editarProducto('${producto.id}')"><i class="bi bi-pencil-square"></i></button>
+                <button class="btn-eliminar" onclick="eliminarProducto('${producto.id}')"><i class="bi bi-trash"></i></button>
             </td>
+
         `;
         tbody.appendChild(fila);
     });
