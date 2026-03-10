@@ -21,11 +21,8 @@ class Product {
 
 
 function generarId() {
-    const id = `PRD-${String(nextId).padStart(3, '0')}`;
-    nextId++;
-    return id;
+    return 'PRD-' + crypto.randomUUID().slice(0,8).toUpperCase();
 }
-
 
 function actualizarContadorId() {
     if (productos.length === 0) {
