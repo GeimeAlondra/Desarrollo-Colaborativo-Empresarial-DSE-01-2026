@@ -20,4 +20,4 @@
 *Problemas encontrados*
 
 - Problemas de sincronización de cambios por cierre de sesión de usuario.
-- Problemas se subida de commits por no descargar cambios previos.v
+- Problemas de subida de commits por no descargar cambios previos.
