@@ -135,25 +135,38 @@ function editarProducto(id) {
     cambiarSeccion('agregar')
 }
 
-
 function eliminarProducto(id) {
     const producto = productos.find(p => p.id === id);
     if (!producto) return;
 
 
-    const index = productos.findIndex(p => p.id === id);
-    if (index !== -1) {
-        productos.splice(index, 1);
-        actualizarContadorId();
-        renderizarProductos();
-    }
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: `¿Quieres eliminar "${producto.nombre}"? Esta acción no se puede deshacer.`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const index = productos.findIndex(p => p.id === id);
+            if (index !== -1) {
+                productos.splice(index, 1);
+                actualizarContadorId();
+                renderizarProductos();
+                Swal.fire({
+                    title: '¡Eliminado!',
+                    text: `${producto.nombre} ha sido eliminado correctamente.`,
+                    icon: 'success',
+                    timer: 2200,
+                    showConfirmButton: false
+                });
+            }
+        }
+    });
 }
-
-
-
-
-    
-
 
 function renderizarProductos() {
     const tbody = document.getElementById("cuerpo-tabla");
