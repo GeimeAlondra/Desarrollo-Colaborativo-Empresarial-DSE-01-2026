@@ -136,6 +136,25 @@ function editarProducto(id) {
 }
 
 
+function eliminarProducto(id) {
+    const producto = productos.find(p => p.id === id);
+    if (!producto) return;
+
+
+    const index = productos.findIndex(p => p.id === id);
+    if (index !== -1) {
+        productos.splice(index, 1);
+        actualizarContadorId();
+        renderizarProductos();
+    }
+}
+
+
+
+
+    
+
+
 function renderizarProductos() {
     const tbody = document.getElementById("cuerpo-tabla");
     tbody.innerHTML = "";
@@ -157,7 +176,6 @@ function renderizarProductos() {
                 <button class="btn-editar" onclick="editarProducto('${producto.id}')"><i class="bi bi-pencil-square"></i></button>
                 <button class="btn-eliminar" onclick="eliminarProducto('${producto.id}')"><i class="bi bi-trash"></i></button>
             </td>
-
         `;
         tbody.appendChild(fila);
     });
