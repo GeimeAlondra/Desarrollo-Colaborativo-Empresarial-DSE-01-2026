@@ -1,6 +1,3 @@
-let nextId = 1
-
-
 class Product {
     constructor(nombre, categoria, precio, stock, descripcion = '') {
         this.id = generarId();
@@ -8,7 +5,7 @@ class Product {
         this.categoria = categoria;
         this.precio = parseFloat(precio);
         this.stock = parseInt(stock);
-        this.estado = this.stock > 0 ? "disponible" : "agotado";        
+        this.estado = this.stock > 0 ? "disponible" : "agotado";
         this.descripcion = descripcion.trim();
     }
 
@@ -21,35 +18,17 @@ class Product {
 
 
 function generarId() {
-    return 'PRD-' + crypto.randomUUID().slice(0,8).toUpperCase();
-}
-
-function actualizarContadorId() {
-    if (productos.length === 0) {
-        nextId = 1;
-        return;
-    }
-   
-    let maxNum = 0;
-    productos.forEach(p => {
-        if (p.id && p.id.startsWith('PRD-')) {
-            const num = parseInt(p.id.substring(4));
-            if (!isNaN(num) && num > maxNum) maxNum = num;
-        }
-    });
-    nextId = maxNum + 1;
+    return 'PRD-' + crypto.randomUUID().slice(0, 8).toUpperCase()
 }
 
 
 let productos = [
-        new Product("Café Americano", "Bebidas Calientes", 2.50, 45, "Café - tamaño mediano"),
-        new Product("Latte Vainilla", "Bebidas Calientes", 4.20, 18, "Espresso con leche vaporizada"),
-        new Product("Frappé Mocha", "Bebidas Frías", 5.80, 8, "Café helado con chocolate y crema batida"),
-        new Product("Cheesecake de Fresa", "Postres", 4.90, 12, "Base de galleta con queso crema y mermelada de fresa"),
-        new Product("Brownie con Nueces", "Postres", 3.80, 0, "Brownie intenso de chocolate negro con nueces")
-    ];
- 
-actualizarContadorId();
+    new Product("Café Americano", "Bebidas Calientes", 2.50, 45, "Café - tamaño mediano"),
+    new Product("Latte Vainilla", "Bebidas Calientes", 4.20, 18, "Espresso con leche vaporizada"),
+    new Product("Frappé Mocha", "Bebidas Frías", 5.80, 8, "Café helado con chocolate y crema batida"),
+    new Product("Cheesecake de Fresa", "Postres", 4.90, 12, "Base de galleta con queso crema y mermelada de fresa"),
+    new Product("Brownie con Nueces", "Postres", 3.80, 0, "Brownie intenso de chocolate negro con nueces")
+];
 
 
 function agregarProducto() {
@@ -132,18 +111,19 @@ function editarProducto(id) {
     cambiarSeccion('agregar')
 }
 
+
 function eliminarProducto(id) {
     const producto = productos.find(p => p.id === id);
     if (!producto) return;
 
 
     Swal.fire({
-        title: '¿Estás seguro?',
-        text: `¿Quieres eliminar "${producto.nombre}"? Esta acción no se puede deshacer.`,
+        title: '¿Está seguro?',
+        text: `¿Desea eliminar "${producto.nombre}"?`,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
         confirmButtonText: 'Eliminar',
         cancelButtonText: 'Cancelar'
     }).then((result) => {
@@ -151,8 +131,9 @@ function eliminarProducto(id) {
             const index = productos.findIndex(p => p.id === id);
             if (index !== -1) {
                 productos.splice(index, 1);
-                actualizarContadorId();
                 renderizarProductos();
+
+
                 Swal.fire({
                     title: '¡Eliminado!',
                     text: `${producto.nombre} ha sido eliminado correctamente.`,
@@ -165,23 +146,13 @@ function eliminarProducto(id) {
     });
 }
 
+
 function renderizarProductos() {
     const tbody = document.getElementById("cuerpo-tabla");
-    const texto = document.getElementById('input-busqueda')?.value.toLowerCase().trim() ?? '';
-    const categoria = document.getElementById('filtro-categoria')?.value ?? '';
-
-
     tbody.innerHTML = "";
 
 
-    const productosFiltrados = productos.filter(p => {
-        const coincideNombre = p.nombre.toLowerCase().includes(texto);
-        const coincideCategoria = categoria === '' || p.categoria === categoria;
-        return coincideNombre && coincideCategoria;
-    });
-
-
-    productosFiltrados.forEach(producto => {
+    productos.forEach(producto => {
         const fila = document.createElement("tr");
         fila.innerHTML = `
             <td>${producto.id}</td>
@@ -192,8 +163,8 @@ function renderizarProductos() {
             <td class="${producto.estado === 'disponible' ? 'estado-activo' : 'estado-inactivo'}">
                 ${producto.estado.charAt(0).toUpperCase() + producto.estado.slice(1)}
             </td>
-            <td>${producto.descripcion || '—'}</td>
             <td>
+                <button class="btn-ver" onclick="verDetalles('${producto.id}')"><i class="bi bi-eye-fill"></i></button>
                 <button class="btn-editar" onclick="editarProducto('${producto.id}')"><i class="bi bi-pencil-square"></i></button>
                 <button class="btn-eliminar" onclick="eliminarProducto('${producto.id}')"><i class="bi bi-trash"></i></button>
             </td>
@@ -203,8 +174,7 @@ function renderizarProductos() {
 }
 
 
-
-function cancelarAccion(){
+function cancelarAccion() {
     resetearFormulario();
     cambiarSeccion('lista');
     renderizarProductos();
@@ -235,7 +205,7 @@ function cambiarSeccion(seccion) {
 
 // Navegación entre secciones
 document.querySelectorAll('.nav-link').forEach(btn => {
-    btn.addEventListener('click', function(e) {
+    btn.addEventListener('click', function (e) {
         e.preventDefault();
 
 
@@ -256,8 +226,36 @@ document.querySelectorAll('.nav-link').forEach(btn => {
 });
 
 
-renderizarProductos();
+//#region Panel de productos
+function verDetalles(id) {
+    const producto = productos.find(p => p.id === id);
+    if (!producto) return;
 
-document.getElementById('input-busqueda').addEventListener('input', renderizarProductos);
-document.getElementById('filtro-categoria').addEventListener('change', renderizarProductos);
+
+    document.getElementById('panel-titulo').textContent = producto.nombre;
+    document.getElementById('panel-nombre').textContent = producto.nombre;
+    document.getElementById('panel-categoria').textContent = producto.categoria;
+    document.getElementById('panel-id').textContent = producto.id;
+    document.getElementById('panel-precio').textContent = '$' + producto.precio.toFixed(2);
+    document.getElementById('panel-stock').textContent = producto.stock;
+   
+    const estadoEl = document.getElementById('panel-estado');
+    estadoEl.textContent = producto.estado.charAt(0).toUpperCase() + producto.estado.slice(1);
+    estadoEl.className = 'estado-badge ' + (producto.estado === 'disponible' ? 'estado-activo' : 'estado-inactivo');
+    document.getElementById('panel-descripcion').textContent = producto.descripcion || 'Sin descripción adicional.';
+    document.getElementById('detalle-panel').classList.add('activo');
+}
+
+function cerrarPanel() {
+    document.getElementById('detalle-panel').classList.remove('activo');
+}
+
+function editarDesdePanel() {
+    const id = document.getElementById('panel-id').textContent;
+    cerrarPanel();
+    editarProducto(id);
+}
+
+//#endregion
+renderizarProductos();
 
