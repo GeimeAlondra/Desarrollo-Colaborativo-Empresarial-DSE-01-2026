@@ -149,10 +149,17 @@ function eliminarProducto(id) {
 
 function renderizarProductos() {
     const tbody = document.getElementById("cuerpo-tabla");
+    const texto = document.getElementById('input-busqueda')?.value.toLowerCase().trim() ?? '';
+    const categoria = document.getElementById('filtro-categoria')?.value ?? '';
     tbody.innerHTML = "";
 
+    const productosFiltrados = productos.filter(p => {
+        const coincideNombre = p.nombre.toLowerCase().includes(texto);
+        const coincideCategoria = categoria === '' || p.categoria === categoria;
+        return coincideNombre && coincideCategoria;
+    });
 
-    productos.forEach(producto => {
+    productosFiltrados.forEach(producto => {   
         const fila = document.createElement("tr");
         fila.innerHTML = `
             <td>${producto.id}</td>
@@ -226,7 +233,7 @@ document.querySelectorAll('.nav-link').forEach(btn => {
 });
 
 
-//#region Panel de productos
+//Panel de productos
 function verDetalles(id) {
     const producto = productos.find(p => p.id === id);
     if (!producto) return;
@@ -256,6 +263,8 @@ function editarDesdePanel() {
     editarProducto(id);
 }
 
-//#endregion
 renderizarProductos();
+
+document.getElementById('input-busqueda').addEventListener('input', renderizarProductos);
+document.getElementById('filtro-categoria').addEventListener('change', renderizarProductos);
 
