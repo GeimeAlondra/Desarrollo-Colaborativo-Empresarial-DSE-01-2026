@@ -258,3 +258,6 @@ document.querySelectorAll('.nav-link').forEach(btn => {
 
 renderizarProductos();
 
+document.getElementById('input-busqueda').addEventListener('input', renderizarProductos);
+document.getElementById('filtro-categoria').addEventListener('change', renderizarProductos);
+
