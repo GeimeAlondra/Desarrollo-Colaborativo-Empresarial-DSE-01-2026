@@ -20,3 +20,4 @@
 *Problemas encontrados*
 
 - Problemas de subida de commits por no descargar cambios previos.
+- Eliminación de la funcionalidad principal de filtrado por no descargar los cambios previos de la rama (se solucionó haciendo otro commit donde se reincorporó el código eliminado)
