@@ -167,10 +167,21 @@ function eliminarProducto(id) {
 
 function renderizarProductos() {
     const tbody = document.getElementById("cuerpo-tabla");
+    const texto = document.getElementById('input-busqueda')?.value.toLowerCase().trim() ?? '';
+    const categoria = document.getElementById('filtro-categoria')?.value ?? '';
+
+
     tbody.innerHTML = "";
 
 
-    productos.forEach(producto => {
+    const productosFiltrados = productos.filter(p => {
+        const coincideNombre = p.nombre.toLowerCase().includes(texto);
+        const coincideCategoria = categoria === '' || p.categoria === categoria;
+        return coincideNombre && coincideCategoria;
+    });
+
+
+    productosFiltrados.forEach(producto => {
         const fila = document.createElement("tr");
         fila.innerHTML = `
             <td>${producto.id}</td>
@@ -190,6 +201,7 @@ function renderizarProductos() {
         tbody.appendChild(fila);
     });
 }
+
 
 
 function cancelarAccion(){
