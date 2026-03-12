@@ -39,33 +39,7 @@
     <main>
         <!-- Lista de productos -->
         <section id="seccion-lista" class="seccion active">
-
-<!-- Barra de búsqueda y filtro -->
-        <div id="barra-busqueda">
-            <div class="busqueda-wrapper">
-                <i class="bi bi-search icono-busqueda"></i>
-                <input 
-                    type="text" 
-                    id="input-busqueda" 
-                    class="inputForm" 
-                    placeholder="Buscar por nombre..."
-                >
-            </div>
-
-            <div class="filtro-wrapper">
-                <i class="bi bi-funnel icono-filtro"></i>
-                <select id="filtro-categoria" class="inputForm">
-                    <option value="">Todas las categorías</option>
-                    <option value="Bebidas Calientes">Bebidas Calientes</option>
-                    <option value="Bebidas Frías">Bebidas Frías</option>
-                    <option value="Postres">Postres</option>
-                    <option value="Sandwiches y Salados">Sandwiches y Salados</option>
-                    <option value="Otros">Otros</option>
-                </select>
-            </div>
-        </div>
-
-            <h2>Lista de productos</h2>
+            <h2 id="titulo">Lista de productos</h2>
             <div class="tabla-productos-wrapper">
                 <table id="tabla-productos" class="table">
                     <thead>
@@ -76,7 +50,6 @@
                             <th scope="col">Precio</th>
                             <th scope="col">Stock</th>
                             <th scope="col">Estado</th>
-                            <th scope="col">Descripción</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -87,58 +60,115 @@
 
 
         <section id="seccion-agregar" class="seccion">
-            <h2>Agregar nuevo producto</h2>
+            <h2 id="titulo">Agregar nuevo producto</h2>
             <div id="formulario">
 
 
-                <input class="inputForm" type="hidden" id="producto-id" value="">
+                <div class="formulario-contenido">
 
 
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input class="inputForm" type="text" id="nombre" placeholder="ej: Café helado" required>
+                    <input type="hidden" id="producto-id" value="">
+
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input class="inputForm" type="text" id="nombre" placeholder="ej: Café helado" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="categoria">Categoría</label>
+                        <select class="inputForm" id="categoria" required>
+                            <option value="" disabled selected>Seleccione categoría</option>
+                            <option value="Bebidas Calientes">Bebidas Calientes</option>
+                            <option value="Bebidas Frías">Bebidas Frías</option>
+                            <option value="Postres">Postres</option>
+                            <option value="Sandwiches y Salados">Sandwiches y Salados</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="precio">Precio</label>
+                        <input class="inputForm" type="number" id="precio" placeholder="ej: 12.00" min="0" step="0.01"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="stock">Stock</label>
+                        <input class="inputForm" type="number" id="stock" placeholder="ej: 12" min="0" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea class="inputForm" id="descripcion" placeholder="ej: Una rica bebida fria (opcional)"
+                            rows="3"></textarea>
+                    </div>
+
+
+                    <div class="button_group">
+                        <button class="btn btn-outline-success" id="btn-guardar" onclick="agregarProducto()">Agregar producto</button>
+                        <button class="btn btn-outline-danger" id="btn-cancelar" onclick="cancelarAccion()">Cancelar</button>
+                    </div>
                 </div>
-
-
-                <div class="form-group">
-                    <label for="categoria">Categoría</label>
-                    <select class="inputForm" id="categoria" required>
-                        <option value="" disabled selected>Seleccione categoría</option>
-                        <option value="Bebidas Calientes">Bebidas Calientes</option>
-                        <option value="Bebidas Frías">Bebidas Frías</option>
-                        <option value="Postres">Postres</option>
-                        <option value="Sandwiches y Salados">Sandwiches y Salados</option>
-                        <option value="Otros">Otros</option>
-                    </select>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="precio">Precio</label>
-                    <input class="inputForm" type="number" id="precio" placeholder="ej: 12.00" min="0" step="0.01"
-                        required>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="stock">Stock</label>
-                    <input class="inputForm" type="number" id="stock" placeholder="ej: 12" min="0" required>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="descripcion">Descripcion</label>
-                    <textarea class="inputForm" id="descripcion"
-                        placeholder="ej: Una rica bebida fria (opcional)" rows="3"></textarea>
-                </div>
-
-
-                <button class="btn btn-outline-success" id="btn-guardar" onclick="agregarProducto()">Agregar
-                    producto</button>
-                <button class="btn btn-outline-danger" id="btn-cancelar" onclick="cancelarAccion()">Cancelar</button>
             </div>
         </section>
     </main>
+
+
+    <aside id="detalle-panel" class="detalle-panel">
+        <div class="panel-header">
+            <h3 id="panel-titulo">Detalles del producto</h3>
+            <button class="btn-cerrar-panel" onclick="cerrarPanel()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="panel-contenido" id="panel-contenido">
+            <div class="producto-preview">
+                <div class="preview-imagen-placeholder">
+                    <i class="bi bi-cup-hot-fill"></i>
+                </div>
+                <h4 id="panel-nombre"></h4>
+                <span id="panel-categoria" class="badge-categoria"></span>
+            </div>
+
+
+            <div class="detalles-grid">
+                <div class="detalle-item">
+                    <span class="detalle-label">ID</span>
+                    <span id="panel-id"></span>
+                </div>
+                <div class="detalle-item">
+                    <span class="detalle-label">Precio</span>
+                    <span id="panel-precio"></span>
+                </div>
+                <div class="detalle-item">
+                    <span class="detalle-label">Stock actual</span>
+                    <span id="panel-stock"></span>
+                </div>
+                <div class="detalle-item">
+                    <span class="detalle-label">Estado</span>
+                    <span id="panel-estado" class="estado-badge"></span>
+                </div>
+            </div>
+
+
+            <div class="detalle-descripcion">
+                <h5>Descripción</h5>
+                <p id="panel-descripcion"></p>
+            </div>
+
+
+            <div class="panel-acciones">
+                <button class="btn btn-outline-primary" onclick="editarDesdePanel()">
+                    <i class="bi bi-pencil"></i> Editar producto
+                </button>
+            </div>
+        </div>
+    </aside>
 
 
     <script src="app.js"></script>
@@ -152,3 +182,4 @@
 
 
 </html>
+
